@@ -35,7 +35,7 @@ export interface CommandOption {
     }[]
 }
 
-export function Command(option?: CommandOption): MethodDecorator {
+export function Command(option?: CommandOption): any {
     return (
         target: object,
         key: string | symbol,
@@ -48,9 +48,8 @@ export function Command(option?: CommandOption): MethodDecorator {
             }
         }
 
-        // 根据design:paramtypes自动补充默认的参数
-        if (isNil(option.params)) {
-            option.params = []
+        if (isNil(option?.params)) {
+            if (option) option.params = []
             const params =
                 Reflect.getMetadata('design:paramtypes', target, key) || []
             let i = 1
@@ -59,14 +58,14 @@ export function Command(option?: CommandOption): MethodDecorator {
                 if (!['string', 'number', 'boolean'].includes(type)) {
                     return
                 }
-                option.params.push({
+                option?.params?.push({
                     type: 'positional',
                     name: `${type}${i}`,
                     value: {
                         type,
                     },
                 })
-                option.command += ` <${type}${i}>`
+                if (option) option.command += ` <${type}${i}>`
                 i = i + 1
             })
         }

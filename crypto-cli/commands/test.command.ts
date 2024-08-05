@@ -1,14 +1,14 @@
 import * as yargs from 'yargs'
-import Todos from '../utils/todos'
+import Cryptos from '../utils/cryptos'
 
 export class TestCommand implements yargs.CommandModule {
     public command = 'get <title>'
 
-    public describe = 'get todo info'
+    public describe = 'get crypto info'
 
     builder(args: yargs.Argv) {
         return args
-            .positional('title', {
+            .positional('id', {
                 alias: 't',
                 type: 'string',
             })
@@ -20,8 +20,8 @@ export class TestCommand implements yargs.CommandModule {
     }
 
     handler(args: yargs.Arguments) {
-        const todo = Todos.getTodoByTitle(args.title as string)
-        todo.prittyPrint()
+        const crypto = Cryptos.getCryptoById(args.id as string)
+        crypto.prettyPrint()
         args.done && console.log(`\ndone!`)
         process.exit(0)
     }

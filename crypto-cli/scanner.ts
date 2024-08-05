@@ -1,6 +1,6 @@
 import { CommandModule, Options, PositionalOptions } from 'yargs'
 import { flattenDeep, pick, compact } from 'lodash'
-import { Decorator1, Decorator2 } from './commands/decorator.command'
+import { Decorator2 } from './commands/decorator.command'
 import {
     COMMANDS_HANDLER_METADATA,
     COMMAND_HANDLER_METADATA,
@@ -10,7 +10,7 @@ import {
 
 export class Scanner {
     static scan(): CommandModule[] {
-        const clasess = [Decorator1, Decorator2]
+        const clasess = [Decorator2]
         const commands = compact(
             flattenDeep<CommandModule>(
                 clasess.map((c) => {

@@ -1,24 +1,14 @@
 import { plainToInstance } from 'class-transformer'
 import { Command, Commands } from '../utils/decorator'
-import Todo from '../utils/todo'
-import Todos from '../utils/todos'
+import Cryptos from '../utils/cryptos'
 
-export class Decorator1 {
-    @Command()
-    add2(title: string, body?: string) {
-        const todo = Todos.addNewTodo(new Todo(title, body))
-        todo.prittyPrint()
-    }
-}
-
-@Commands({
-    command: 'all2',
-})
 export class Decorator2 {
-    all2() {
-        Todos.readAllTodos().map((singleTodo: Todo) => {
-            plainToInstance(Todo, singleTodo).prittyPrint()
-        })
+    @Command({
+        command: 'init',
+        describe: 'init the database ',
+    })
+    init() {
+        Cryptos.writeAllCryptos()
         console.log(`\ndone`)
     }
 }

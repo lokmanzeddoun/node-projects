@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
+        "types": ["node"],
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "module": "commonjs",
         "esModuleInterop": true,
-        "target": "es6",
-        "moduleResolution": "node",
+        "target": "ES5",
         "sourceMap": true,
         "outDir": "dist"
     },
